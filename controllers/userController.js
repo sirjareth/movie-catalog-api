@@ -38,7 +38,7 @@ module.exports.loginUser = async (req, res) => {
     const isPasswordCorrect = bcrypt.compareSync(req.body.password, result.password);
 
     if (isPasswordCorrect) {
-      return res.status(200).send({ access: auth.createAccessToken(result) });
+      return res.status(200).send({ access: auth.createAccessToken(result), isAdmin: result.isAdmin });
     } else {
       return res.status(401).send({ message: "Incorrect email or password"});
     }
